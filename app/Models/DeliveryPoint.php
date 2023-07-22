@@ -26,8 +26,8 @@ class DeliveryPoint extends Model
 
     protected $casts
         = [
-            'latitude' => 'string',
-            'longitude' => 'string',
+            'latitude' => 'float',
+            'longitude' => 'float',
             'description' => 'string',
             'receiver_name' => 'string',
             'receiver_phone' => 'string',

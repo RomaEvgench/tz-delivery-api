@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('return_points', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->float('latitude');
+            $table->float('longitude');
             $table->string('address');
             $table->string('receiver_name');
             $table->string('receiver_phone');

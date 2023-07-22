@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 class ReturnPoint extends Model
 {
     use HasFactory;
+
     protected $keyType = 'string';
     protected $fillable
         = [
@@ -24,8 +25,8 @@ class ReturnPoint extends Model
 
     protected $casts
         = [
-            'latitude' => 'string',
-            'longitude' => 'string',
+            'latitude' => 'float',
+            'longitude' => 'float',
             'address' => 'string',
             'receiver_name' => 'string',
             'receiver_phone' => 'string',

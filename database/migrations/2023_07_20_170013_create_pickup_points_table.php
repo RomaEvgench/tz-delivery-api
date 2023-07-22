@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('pickup_points', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('latitude');
-            $table->string('longitude');
+            $table->float('latitude');
+            $table->float('longitude');
             $table->string('address');
             $table->string('sender_name');
             $table->string('sender_phone');

@@ -14,11 +14,27 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'return_point' => 'required | array',
-            'pickup_point' => 'required | array',
-            'price' => 'required | integer',
-            'deliveries' => 'required | array',
-            'deliveries.*.cargo' => 'required | array | min:1',
+            'return_point' => 'required',
+            'return_point.address' => 'required | string | min: 1 | max: 256',
+            'return_point.receiver_name' => 'required | string | min: 1 | max: 256',
+            'return_point.receiver_phone' => 'required | string | min: 12 | max: 12',
+
+            'pickup_point' => 'required',
+            'pickup_point.address' => 'required | string | min: 1 | max: 256',
+            'pickup_point.sender_name' => 'required | string | min: 1 | max: 256',
+            'pickup_point.sender_phone' => 'required | string | min: 12 | max: 12',
+
+            'deliveries' => 'required | array | min: 1',
+            'deliveries.*.address' => 'required | string | min: 1 | max: 256',
+            'deliveries.*.receiver_name' => 'required | string | min: 1 | max: 256',
+            'deliveries.*.receiver_phone' => 'required | string | min: 12 | max: 12',
+
+            'deliveries.*.cargo' => 'required | array | min: 1',
+            'deliveries.*.cargo.*.name' => 'required | string | min: 1 | max: 256',
+            'deliveries.*.cargo.*.weight' => 'required | integer | min: 1 | max: 1000',
+            'deliveries.*.cargo.*.size' => 'required | string | min: 6 | max: 256',
+
+            'price' => 'required | integer | min: 1 | max: 1000000',
         ];
     }
 }

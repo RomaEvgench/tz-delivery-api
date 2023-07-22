@@ -1,0 +1,191 @@
+{
+	"info": {
+		"_postman_id": "dd6a4d99-881c-47fc-aba6-0eaf35bd9d22",
+		"name": "delivery-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28694392"
+	},
+	"item": [
+		{
+			"name": "store order",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pickup_point\": {\r\n        \"address\": \"Кашира, улица Металлургов дом 1\",\r\n        \"sender_name\": \"Иванов Иван\",\r\n        \"sender_phone\": \"+77777777777\"\r\n    },\r\n    \"deliveries\": [\r\n        {\r\n            \"address\": \"Москва, Парк Горького\",\r\n            \"receiver_name\": \"Николаев Николай\",\r\n            \"receiver_phone\": \"+77777777777\",\r\n            \"cargo\": [\r\n                {\r\n                    \"name\": \"Коробка\",\r\n                    \"weight\": 15,\r\n                    \"size\": \"15x23x22\"\r\n                },\r\n                {\r\n                    \"name\": \"Коробка побольше\",\r\n                    \"weight\": 25,\r\n                    \"size\": \"15x23x22\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"return_point\": {\r\n        \"address\": \"Москва, Парк Горького\",\r\n        \"receiver_name\": \"Александров Александр\",\r\n        \"receiver_phone\": \"+77777777777\"\r\n    },\r\n    \"price\": 3500\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "store order with 3 delivery points",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pickup_point\": {\r\n        \"address\": \"Кашира, улица Победы дом 7\",\r\n        \"sender_name\": \"Виктор Викторович\",\r\n        \"sender_phone\": \"+77777777777\"\r\n    },\r\n    \"deliveries\": [\r\n        {\r\n            \"address\": \"Кашира, улица Победы дом 7 к1\",\r\n            \"receiver_name\": \"Имя получателя3\",\r\n            \"receiver_phone\": \"+77777777777\",\r\n            \"cargo\": [\r\n                {\r\n                    \"name\": \"Холодильник\",\r\n                    \"weight\": 30,\r\n                    \"size\": \"15x23x22\"\r\n                },\r\n                {\r\n                    \"name\": \"Шкаф\",\r\n                    \"weight\": 12,\r\n                    \"size\": \"15x23x22\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"address\": \"Кашира, улица Победы дом 7 к2\",\r\n            \"receiver_name\": \"Андреев Андрей\",\r\n            \"receiver_phone\": \"+77777777777\",\r\n            \"cargo\": [\r\n                {\r\n                    \"name\": \"Что-то очень важное\",\r\n                    \"weight\": 900,\r\n                    \"size\": \"15x23x22\"\r\n                }\r\n            ]\r\n        },\r\n        {\r\n            \"address\": \"Кашира, улица Победы дом 7 к1\",\r\n            \"receiver_name\": \"Имя получателя3\",\r\n            \"receiver_phone\": \"+77777777777\",\r\n            \"cargo\": [\r\n                {\r\n                    \"name\": \"Холодильник\",\r\n                    \"weight\": 30,\r\n                    \"size\": \"15x23x22\"\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"return_point\": {\r\n        \"address\": \"Кашира, улица Металлургов 7\",\r\n        \"receiver_name\": \"Павлов Павел\",\r\n        \"receiver_phone\": \"+77777777777\"\r\n    },\r\n    \"price\": 4000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "store order with cargo = 0 (error)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"pickup_point\": {\r\n        \"address\": \"Москва, Парк Горького\",\r\n        \"sender_name\": \"Александров Александр\",\r\n        \"sender_phone\": \"+77777777777\"\r\n    },\r\n    \"deliveries\": [\r\n        {\r\n            \"address\": \"Москва, Парк Горького\",\r\n            \"receiver_name\": \"Иванов Иван\",\r\n            \"receiver_phone\": \"+77777777777\",\r\n            \"cargo\": []\r\n        }\r\n    ],\r\n    \"return_point\": {\r\n        \"address\": \"Кашира, улица Металлургов дом 7\",\r\n        \"receiver_name\": \"Иванов Александр\",\r\n        \"receiver_phone\": \"+77777777777\"\r\n    },\r\n    \"price\": 355\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/api/order",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"order"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get order by uuid",
+			"protocolProfileBehavior": {
+				"followRedirects": false
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/order/eecfc887-c8b5-46b5-bbc1-c8b391082bd6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"order",
+						"eecfc887-c8b5-46b5-bbc1-c8b391082bd6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all orders",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/orders?limit=10&offset=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "10",
+							"description": "Обязательный параметр, ограничивает количество записей"
+						},
+						{
+							"key": "offset",
+							"value": "5",
+							"description": "Сколько записей пропустить"
+						},
+						{
+							"key": "date_start",
+							"value": "2023-07-22T18:10:35+03:00",
+							"description": "Фильтирация по дате от",
+							"disabled": true
+						},
+						{
+							"key": "date_end",
+							"value": "2023-07-22T18:25:35+03:00",
+							"description": "Фильтирация по дате до",
+							"disabled": true
+						},
+						{
+							"key": "status",
+							"value": "Новый",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cansel order by uuid",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api/order/eecfc887-c8b5-46b5-bbc1-c8b391082bd6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api",
+						"order",
+						"eecfc887-c8b5-46b5-bbc1-c8b391082bd6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

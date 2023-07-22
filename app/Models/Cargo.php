@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 class Cargo extends Model
 {
     use HasFactory;
+
     protected $keyType = 'string';
     protected $fillable
         = [
@@ -26,8 +27,6 @@ class Cargo extends Model
         = [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
-            'pickup_point' => 'json',
-            'return_point' => 'json',
             'status' => CargoStatusEnum::class,
         ];
 
@@ -39,6 +38,7 @@ class Cargo extends Model
             $model->id = Str::uuid();
         });
     }
+
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);

@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('cargos', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
-            $table->string('weight');
+            $table->integer('weight');
             $table->string('size');
             $table->enum('status', CargoStatusEnum::values())->default(CargoStatusEnum::UNDELIVERED->value);
 

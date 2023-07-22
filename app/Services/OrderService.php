@@ -23,15 +23,13 @@ class OrderService
         private readonly PickupPointRepository $pickupPointRepository,
         private readonly ReturnPointRepository $returnPointRepository
     ) {
-
     }
 
     public function cansel($id): string
     {
         $order = $this->orderRepository->getOrder($id, false);
         $message = "Заказ отменен";
-
-        switch ($order->status) {
+        switch ($order->status->value) {
             case OrderStatusEnum::CREATED->value:
                 dispatch(new CancelNewOrderJob($order));
                 break;
@@ -54,9 +52,15 @@ class OrderService
         return $this->orderRepository->getOrder($id, true);
     }
 
-    public function getAllOrders(): Collection
-    {
-        return $this->orderRepository->getAllOrders();
+    public function getAllOrders(
+        int $offset,
+        int $limit,
+        string $status = null,
+        string $dateStart = null,
+        string $dateEnd = null
+    ): Collection {
+        return $this->orderRepository->getAllOrders($offset, $limit, $status,
+            $dateStart, $dateEnd);
     }
 
     public function store($data)

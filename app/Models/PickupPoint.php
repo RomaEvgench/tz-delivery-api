@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 class PickupPoint extends Model
 {
     use HasFactory;
+
     protected $keyType = 'string';
     protected $fillable
         = [
@@ -24,8 +25,8 @@ class PickupPoint extends Model
 
     protected $casts
         = [
-            'latitude' => 'string',
-            'longitude' => 'string',
+            'latitude' => 'float',
+            'longitude' => 'float',
             'address' => 'string',
             'sender_name' => 'string',
             'sender_phone' => 'string',
@@ -39,6 +40,7 @@ class PickupPoint extends Model
             $model->id = Str::uuid();
         });
     }
+
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
