@@ -1,0 +1,43 @@
+FROM php:8.2-fpm as php-fpm
+
+WORKDIR /var/www/public
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+RUN apt-get update && apt-get install -y \
+    curl \
+    nginx \
+    libpq-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    git \
+    supervisor \
+    systemctl
+
+
+RUN docker-php-ext-install pdo_pgsql pgsql mbstring exif pcntl bcmath
+
+# Установка Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
+
+RUN mkdir -p /var/log/supervisor
+COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY ./docker-conf/nginx/conf.d/nginx.conf /etc/nginx/conf.d/nginx.conf
+
+
+WORKDIR /var/www
+
+COPY composer.json composer.lock ./
+
+COPY . /var/www
+
+RUN composer install
+
+RUN chown -R www-data:www-data /var/www/storage
+
+COPY ./docker-conf/scripts/start.sh /etc/scripts/
+
+EXPOSE 9000
+
+RUN chmod +x /etc/scripts/start.sh
+CMD ["/etc/scripts/start.sh"]
