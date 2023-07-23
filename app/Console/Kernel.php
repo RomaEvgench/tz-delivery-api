@@ -12,15 +12,10 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * Define the application's command schedule.
-     */
     protected function schedule(Schedule $schedule): void
     {
 
-        $schedule->call(function () {
-            dispatch(new UpdateNewOrdersJob());
-        })->everyMinute();
+        $schedule->job(new UpdateNewOrdersJob())->everyMinute();
 
         $schedule->call(function () {
             $orders = Order::where('status', OrderStatusEnum::DELIVERING->value)
@@ -32,16 +27,11 @@ class Kernel extends ConsoleKernel
                 dispatch(new DeliverCargoJob($order));
             }
         })->everyMinute();
-
-
     }
 
-    /**
-     * Register the commands for the application.
-     */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
