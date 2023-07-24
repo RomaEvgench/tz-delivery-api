@@ -63,7 +63,7 @@ class OrderService
             $dateStart, $dateEnd);
     }
 
-    public function store($data)
+    public function store($data): Order
     {
         $deliveriesData = $data['deliveries'];
         $returnPointData = $data['return_point'];
